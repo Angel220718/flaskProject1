@@ -14,7 +14,7 @@ cursor = db.cursor()
 
 @app.route('/data', methods=['GET'])
 def get_data():
-    cursor.execute("SELECT * FROM asistencia")
+    cursor.execute("SELECT * FROM asistencias")
     data = cursor.fetchall()
     return jsonify({'data': data})
 
