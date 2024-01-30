@@ -1,12 +1,21 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+import mysql.connector
 
 app = Flask(__name__)
 
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="db_consultas"
+)
+cursor = db.cursor()
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
+@app.route('/data', methods=['GET'])
+def get_data():
+    cursor.execute("SELECT * FROM tu_tabla")
+    data = cursor.fetchall()
+    return jsonify({'data': data})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
