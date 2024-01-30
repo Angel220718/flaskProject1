@@ -11,11 +11,13 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
+
 @app.route('/data', methods=['GET'])
 def get_data():
-    cursor.execute("SELECT * FROM tu_tabla")
+    cursor.execute("SELECT * FROM asistencia")
     data = cursor.fetchall()
     return jsonify({'data': data})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
